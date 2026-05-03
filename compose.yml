@@ -1,13 +1,15 @@
 services:
-  librarium:
+  librarium-init:
     build:
-      context: ..
-      dockerfile: build-librarium/Dockerfile
+      context: .
+      dockerfile: docker/librarium-init/Dockerfile
     environment:
       HEX_LIBRARIUM: /hex/librarium
     volumes:
       - hex-librarium:/hex/librarium
+    restart: "no"
 
 volumes:
   hex-librarium:
     name: hex-librarium
+    external: true

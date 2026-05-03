@@ -16,13 +16,15 @@ All Hex-adjacent systems draw from it. None should attempt to redefine it.
 
 The canonical volume contract and directory structure are defined in [docs/librarium-contract.md](docs/librarium-contract.md).
 
+External projects should initialize the volume with the published init image as a one-shot Compose service. See [docs/consuming-librarium.md](docs/consuming-librarium.md).
+
 Create or update the directory structure inside the volume with:
 
 ```sh
 /usr/local/bin/init-librarium
 ```
 
-The reusable script lives at [scripts/init-librarium.sh](scripts/init-librarium.sh). A disposable Docker harness for testing the volume initializer lives in [build-librarium](build-librarium).
+The reusable script lives at [scripts/init-librarium.sh](scripts/init-librarium.sh). The root [compose.yml](compose.yml) includes a `librarium-init` service for local testing.
 
 ## Purpose
 

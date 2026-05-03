@@ -14,6 +14,7 @@ All Hex containers that need model artifacts should mount the named volume at th
 volumes:
   hex-librarium:
     name: hex-librarium
+    external: true
 
 services:
   example:
@@ -24,6 +25,8 @@ services:
 ```
 
 The directory structure is created inside the mounted volume by [scripts/init-librarium.sh](../scripts/init-librarium.sh).
+
+External projects should usually run the published initializer image as a one-shot Compose service. See [consuming-librarium.md](consuming-librarium.md).
 
 Containers can copy this script into an image and use it as an entrypoint or call it before launching the project-specific process:
 
