@@ -16,15 +16,42 @@ All Hex-adjacent systems draw from it. None should attempt to redefine it.
 
 The canonical volume contract and directory structure are defined in [docs/librarium-contract.md](docs/librarium-contract.md).
 
-External projects should initialize the volume with the published init image as a one-shot Compose service. See [docs/consuming-librarium.md](docs/consuming-librarium.md).
+## Consuming Projects
 
-Create or update the directory structure inside the volume with:
+External Docker projects should import the published initializer image as a one-shot Compose service:
 
-```sh
-/usr/local/bin/init-librarium
+```yaml
+services:
+  init-librarium:
+    image: ghcr.io/hex/librarium-init:0.1.0
+    volumes:
+      - hex-librarium:/hex/librarium
+    restart: "no"
+
+  app:
+    depends_on:
+      init-librarium:
+        condition: service_completed_successfully
+    volumes:
+      - hex-librarium:/hex/librarium
+    environment:
+      HEX_LIBRARIUM: /hex/librarium
+
+volumes:
+  hex-librarium:
+    name: hex-librarium
+    external: true
 ```
 
-The reusable script lives at [scripts/init-librarium.sh](scripts/init-librarium.sh). The root [compose.yml](compose.yml) includes a `librarium-init` service for local testing.
+Because the volume is external and shared across projects, Compose will not create it automatically. Tools that depend on the Librarium should create it during startup or setup:
+
+```sh
+docker volume create hex-librarium
+```
+
+The command is idempotent. It prints the existing volume name if the volume already exists.
+
+See [docs/consuming-librarium.md](docs/consuming-librarium.md) for version pinning, GHCR notes, and alternative embedding patterns. The reusable script source lives at [scripts/init-librarium.sh](scripts/init-librarium.sh).
 
 ## Purpose
 

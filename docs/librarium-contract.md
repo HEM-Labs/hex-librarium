@@ -10,6 +10,8 @@ This document defines the shared model volume used by Hex projects.
 
 All Hex containers that need model artifacts should mount the named volume at the same path.
 
+The volume is shared across independent Compose projects, so downstream projects should mark it external and create it during setup with `docker volume create hex-librarium`. Compose does not auto-create external volumes.
+
 ```yaml
 volumes:
   hex-librarium:

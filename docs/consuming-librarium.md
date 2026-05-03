@@ -2,6 +2,16 @@
 
 External Hex projects should consume the Librarium through the shared Docker volume and the published initializer image.
 
+The shared volume is intentionally declared as external. That lets multiple independent Compose projects attach to the same Docker volume, but it also means Compose will not create the volume automatically.
+
+Every tool or setup script that depends on the Librarium should ensure the volume exists before running Compose:
+
+```sh
+docker volume create hex-librarium
+```
+
+This command is idempotent. It succeeds whether the volume is new or already present.
+
 ## Recommended Compose Pattern
 
 Use the initializer as a one-shot service. This keeps application containers clean and avoids wrapping their entrypoints.
@@ -30,12 +40,6 @@ volumes:
 ```
 
 The initializer is idempotent. It creates missing directories and exits without deleting, renaming, or overwriting existing content.
-
-Create the shared volume once before starting stacks that mark it external:
-
-```sh
-docker volume create hex-librarium
-```
 
 ## Pinning Versions
 
