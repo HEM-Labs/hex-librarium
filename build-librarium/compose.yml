@@ -1,0 +1,13 @@
+services:
+  librarium:
+    build:
+      context: ..
+      dockerfile: build-librarium/Dockerfile
+    environment:
+      HEX_LIBRARIUM: /hex/librarium
+    volumes:
+      - hex-librarium:/hex/librarium
+
+volumes:
+  hex-librarium:
+    name: hex-librarium

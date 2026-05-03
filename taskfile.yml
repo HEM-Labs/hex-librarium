@@ -8,3 +8,8 @@ tasks:
     desc: Update the repository
     cmds:
       - git pull
+
+  build-librarium:
+    desc: Build and run the Librarium volume initializer
+    cmds:
+      - docker compose -f build-librarium/compose.yml run --rm --build librarium
