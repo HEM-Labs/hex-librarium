@@ -1,0 +1,10 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task -l
+  update:
+    desc: Update the repository
+    cmds:
+      - git pull
