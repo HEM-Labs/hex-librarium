@@ -16,42 +16,24 @@ All Hex-adjacent systems draw from it. None should attempt to redefine it.
 
 The canonical volume contract and directory structure are defined in [docs/librarium-contract.md](docs/librarium-contract.md).
 
-## Consuming Projects
+## Runtime Bundle
 
-External Docker projects should import the published initializer image as a one-shot Compose service:
+This repository is the meta/runtime bundle for the Librarium contract. It consumes published component images by default:
 
-```yaml
-services:
-  init-librarium:
-    image: ghcr.io/hex/librarium-init:0.1.0
-    volumes:
-      - hex-librarium:/hex/librarium
-    restart: "no"
+- `LIBRARIUM_INIT_IMAGE=ghcr.io/hem-labs/hex-librarium-init:latest`
+- `LIBRARIUM_SYNCTHING_IMAGE=ghcr.io/hem-labs/hex-librarium-syncthing:latest`
 
-  app:
-    depends_on:
-      init-librarium:
-        condition: service_completed_successfully
-    volumes:
-      - hex-librarium:/hex/librarium
-    environment:
-      HEX_LIBRARIUM: /hex/librarium
-
-volumes:
-  hex-librarium:
-    name: hex-librarium
-    external: true
-```
-
-Because the volume is external and shared across projects, Compose will not create it automatically. Tools that depend on the Librarium should create it during startup or setup:
+Pull the current runtime images:
 
 ```sh
-docker volume create hex-librarium
+task pull
 ```
 
-The command is idempotent. It prints the existing volume name if the volume already exists.
+Windows users can run:
 
-See [docs/consuming-librarium.md](docs/consuming-librarium.md) for version pinning, GHCR notes, and alternative embedding patterns. The reusable script source lives at [scripts/init-librarium.sh](scripts/init-librarium.sh).
+```bat
+scripts\pull-images.bat
+```
 
 ## Purpose
 

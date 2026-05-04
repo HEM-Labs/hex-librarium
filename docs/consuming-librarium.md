@@ -19,7 +19,7 @@ Use the initializer as a one-shot service. This keeps application containers cle
 ```yaml
 services:
   init-librarium:
-    image: ghcr.io/hex/librarium-init:0.1.0
+    image: ghcr.io/hem-labs/hex-librarium-init:0.1.0
     volumes:
       - hex-librarium:/hex/librarium
     restart: "no"
@@ -46,13 +46,13 @@ The initializer is idempotent. It creates missing directories and exits without 
 Use a semver tag for normal project manifests:
 
 ```yaml
-image: ghcr.io/hex/librarium-init:0.1.0
+image: ghcr.io/hem-labs/hex-librarium-init:0.1.0
 ```
 
 Use an image digest when a deployment needs exact reproducibility:
 
 ```yaml
-image: ghcr.io/hex/librarium-init@sha256:<digest>
+image: ghcr.io/hem-labs/hex-librarium-init@sha256:<digest>
 ```
 
 Avoid downloading the script from a raw GitHub URL during image builds. Raw URLs are harder to version, audit, cache, and reproduce.
@@ -62,7 +62,7 @@ Avoid downloading the script from a raw GitHub URL during image builds. Raw URLs
 Most projects should use the one-shot service. If a project needs the initializer inside its own image, copy it from the published OCI image:
 
 ```dockerfile
-COPY --from=ghcr.io/hex/librarium-init:0.1.0 \
+COPY --from=ghcr.io/hem-labs/hex-librarium-init:0.1.0 \
   /usr/local/bin/init-librarium \
   /usr/local/bin/init-librarium
 ```
@@ -71,7 +71,7 @@ Then call it from the project image's own startup logic.
 
 ## Publishing
 
-The initializer image is published from this repository by `.github/workflows/publish-librarium-init.yml`.
+The initializer image is published from the `librarium-init` component repository. While this meta repository still contains the component source under `components/librarium-init`, treat that directory as the future repository root for component-level releases.
 
 Create and push a semver tag to publish a release image:
 
@@ -82,9 +82,9 @@ git push origin v0.1.0
 
 The workflow publishes:
 
-- `ghcr.io/<owner>/librarium-init:0.1.0`
-- `ghcr.io/<owner>/librarium-init:0.1`
-- `ghcr.io/<owner>/librarium-init:sha-<commit>`
+- `ghcr.io/hem-labs/hex-librarium-init:0.1.0`
+- `ghcr.io/hem-labs/hex-librarium-init:0.1`
+- `ghcr.io/hem-labs/hex-librarium-init:sha-<commit>`
 
 The configured package name uses the lowercase GitHub repository owner because GHCR image names must be lowercase.
 

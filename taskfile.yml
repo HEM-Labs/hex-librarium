@@ -4,19 +4,25 @@ tasks:
   default:
     cmds:
       - task -l
+
+  # Project management
+
   update:
-    desc: Update the repository
+    desc: Update the repo from upstream
     cmds:
       - git pull
 
-  volume:
-    desc: Create the shared Librarium Docker volume if it does not exist
+  version:
+    desc:
+      "Create a release tag (usage: task version -- 1.2.3)"
+    vars:
+      VERSION: '{{.CLI_ARGS}}'
+    requires:
+      vars: [ VERSION ]
     cmds:
-      - docker volume create hex-librarium
+      - git tag "v{{.VERSION}}"
 
-  librarium-init:
-    desc: Build and run the Librarium volume initializer
-    deps:
-      - volume
+  push:
+    desc: Push the release tag to GitHub
     cmds:
-      - docker compose run --rm --build librarium-init
+      - git push && git push --tags
