@@ -7,6 +7,7 @@ Use these documents when you need the rule without the explanation.
 ## Contract Documents
 
 - [Docker Volume Contracts](volumes.md) - shared volumes, mount paths, and initializer behavior.
+- [Librarium Contract](librarium.md) - canonical model volume structure and model placement rules.
 - [Image Versioning Contract](image-versioning.md) - container image names and tags.
 
 ## General Rules

@@ -6,9 +6,9 @@ For rationale and state categories, see [Persistence and State Management](../pe
 
 ## Known Volumes
 
-| Volume          | Mount Path       | Purpose                |
-|-----------------|------------------|------------------------|
-| `hex-librarium` | `/hex/librarium` | Shared model artifacts |
+| Volume          | Mount Path       | Purpose                                                         |
+|-----------------|------------------|-----------------------------------------------------------------|
+| `hex-librarium` | `/hex/librarium` | Shared model artifacts. See [Librarium Contract](librarium.md). |
 
 ## Rules
 

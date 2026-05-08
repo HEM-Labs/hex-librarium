@@ -25,6 +25,8 @@ The librarium is the local model repository for Hex, providing a shared location
 Models added to the librarium are available to other components and can be optionally synched with other
 nodes for collaboration and sharing.
 
+The canonical folder structure and model placement rules are defined in the [Librarium Contract](docs/contracts/librarium.md).
+
 | Repository                                                                     | Purpose                                                                                      |
 |--------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------|
 | [hex-librarium-init](https://github.com/HEM-Labs/hex-librarium-init)           | (Infra) Initializer for the `hex-librarium` volume                                           |
