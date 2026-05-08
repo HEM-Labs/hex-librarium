@@ -5,6 +5,10 @@
 - Use the `hex-` prefix for implementation repos.
 - Use lowercase kebab-case.
 
+## Git
+
+- Use `master` as the default branch name, do not use `main`.
+
 ## Docker Resources
 
 - Use lowercase kebab-case.
