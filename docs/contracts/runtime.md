@@ -30,3 +30,11 @@ In this example, `18384` is the host-facing Hex default and `8384` remains the u
 Do not change upstream internal ports just to make container log URLs match host URLs. Logs emitted inside a container may describe container-local addresses. Component documentation should tell users which host port to use.
 
 Changing an internal port is appropriate only when there is a functional conflict inside the container or a strong integration reason that cannot be handled at the Compose boundary.
+
+## Ephemeral Stacks
+
+Component containers, Compose networks, and other service runtime objects should be treated as replaceable. Persistent Hex state belongs in documented named volumes or explicitly documented config directories.
+
+Repositories that provide Windows entry points should include a `down.bat` command for removing the component stack with `docker compose down`. Task-based development repositories should expose the same behavior as `task down`.
+
+Down commands must not delete shared Hex volumes or persistent user-owned config unless they are clearly named and documented as destructive variants. For the Librarium sync component, taking the stack down must leave the `hex-librarium` Docker volume intact.

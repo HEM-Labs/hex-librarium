@@ -38,6 +38,10 @@ ENTRYPOINT ["init-librarium"]
 
 The initializer is idempotent. It only creates missing directories and does not remove, rename, or overwrite existing content.
 
+Tool-specific runtime metadata is outside the Librarium directory contract.  
+For example, Syncthing may require a `.stfolder` marker at the volume root when syncing the Librarium.
+That marker should be created and owned by the Syncthing wrapper, not by the shared Librarium initializer, because it belongs to the sync tool rather than the Hex model layout.
+
 ## Scope
 
 The Librarium stores reusable model artifacts and closely-bound model metadata.

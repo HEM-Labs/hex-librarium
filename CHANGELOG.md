@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added runtime contract guidance for shared-volume permissions and preserving upstream container-internal ports.
+- Added guidance for tool-owned Librarium metadata and non-destructive component down commands.
 
 ---
 
