@@ -19,3 +19,4 @@ For rationale and state categories, see [Persistence and State Management](../pe
 - Create required shared volumes before starting dependent services.
 - Initializers may create missing directories inside a volume.
 - Initializers must not delete, rename, or overwrite existing user content without an explicit destructive command.
+- Components that manage shared volumes may run with container-side ownership that matches the shared volume contract instead of the host user's UID/GID. Document this in the component README when it is required.

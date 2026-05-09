@@ -36,3 +36,5 @@ Hex adapters should translate Hex contracts into upstream tool layouts.
 
 The shared contract should not be renamed to match one frontend's preferred structure.
 I.e., Librarium content should be symlinked into a tool's local folder structure, rather than restructure the librarium itself.
+
+The same rule applies to container images. Prefer preserving upstream container internals and using Compose bindings, environment variables, or adapter scripts at the Hex boundary. For example, host-facing ports should usually be mapped at the Compose layer instead of changing the port an upstream service listens on inside its container.
