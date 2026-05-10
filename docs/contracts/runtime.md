@@ -35,6 +35,16 @@ Changing an internal port is appropriate only when there is a functional conflic
 
 Component containers, Compose networks, and other service runtime objects should be treated as replaceable. Persistent Hex state belongs in documented named volumes or explicitly documented config directories.
 
-Repositories that provide Windows entry points should include a `down.bat` command for removing the component stack with `docker compose down`. Task-based development repositories should expose the same behavior as `task down`.
+Repositories that provide Windows entry points should include standard lifecycle scripts:
+
+- `run.bat` for running the component in the foreground
+- `start.bat` for starting the component as a detached service
+- `stop.bat` for stopping a detached service
+- `down.bat` for removing the component stack with `docker compose down`
+- `update.bat` for pulling repository updates and published container images
+
+Task-based development repositories should expose matching `task run`, `task start`, `task stop`, `task down`, and `task update` commands.
+
+Normal run and start commands should not pull images by default. They should use the local image state so startup stays predictable and fast. Update commands should be the explicit refresh path and should run `git pull` followed by `docker compose pull`.
 
 Down commands must not delete shared Hex volumes or persistent user-owned config unless they are clearly named and documented as destructive variants. For the Librarium sync component, taking the stack down must leave the `hex-librarium` Docker volume intact.

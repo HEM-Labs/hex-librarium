@@ -111,6 +111,7 @@ Examples:
     upscaler/
       esrgan/
       real-esrgan/
+      bsrgan/
       swinir/
       dat/
       plksr/
@@ -207,6 +208,7 @@ Stable Video Diffusion checkpoints.
 
 - `image/upscaler/esrgan` for ESRGAN-compatible models
 - `image/upscaler/real-esrgan` for RealESRGAN models
+- `image/upscaler/bsrgan` for BSRGAN models
 - `image/upscaler/swinir` for SwinIR models
 - `image/upscaler/dat` for DAT models
 - `image/upscaler/plksr` for PLKSR models
@@ -305,6 +307,7 @@ models/Components            -> diffusion/component
 models/adetailer             -> image/detection/ultralytics and image/segmentation/ultralytics
 models/ESRGAN                -> image/upscaler/esrgan
 models/RealESRGAN            -> image/upscaler/real-esrgan
+models/BSRGAN                -> image/upscaler/bsrgan
 models/SwinIR                -> image/upscaler/swinir
 models/DAT                   -> image/upscaler/dat
 models/PLKSR                 -> image/upscaler/plksr
